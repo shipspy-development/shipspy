@@ -1,0 +1,15 @@
+[project]
+name = "shippy"
+description = "processing of ship campaign data"
+authors = [
+    {name = "Laura Köhler", email = "laura.koehler@mpimet.mpg.de"},
+]
+
+version = "0.0.1"
+
+[project.scripts]
+shippy = "shippy.cli:main"
+
+[build-system]
+requires = ["setuptools>=45"]
+build-backend = "setuptools.build_meta"
