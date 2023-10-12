@@ -12,8 +12,20 @@ dependencies = [
 ]
 version = "0.0.1"
 
+[project.optional-dependencies]
+tests = [
+    "pytest",
+    "black"
+]
+
 [project.scripts]
 shippy = "shippy.cli:main"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = [
+    "tests",
+]
 
 [build-system]
 requires = ["setuptools>=45"]

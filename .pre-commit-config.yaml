@@ -1,0 +1,25 @@
+# See https://pre-commit.com/ for usage and config
+repos:
+#- repo: https://github.com/psf/black
+#  rev: 23.3.0
+#  hooks:
+#  - id: black
+#    name: black
+#    entry: black
+#    types: [python]
+- repo: local
+  hooks:
+  - id: pytest
+    name: pytest
+    language: system
+    entry: pytest
+    types: [python]
+    pass_filenames: false
+
+  - id: pytest-cov
+    name: pytest
+    language: system
+    stages: [push]
+    entry: pytest --cov --cov-fail-under=50
+    types: [python]
+    pass_filenames: false
