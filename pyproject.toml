@@ -4,7 +4,12 @@ description = "processing of ship campaign data"
 authors = [
     {name = "Laura Köhler", email = "laura.koehler@mpimet.mpg.de"},
 ]
-
+dependencies = [
+    "xarray",
+    "numpy",
+    "pandas",
+    "argparse",
+]
 version = "0.0.1"
 
 [project.scripts]

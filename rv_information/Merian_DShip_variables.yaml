@@ -1,0 +1,177 @@
+Global_radiation.SMSMN.GS:
+  cell_method: minutely mean
+  instrument: Global Radiation (DShip)
+  long_name: shortwave downward radiation
+  standard_name: net_downward_shortwave_flux_in_air
+  units: W m-2
+  varname: swr
+Global_radiation.SMSMN.IR:
+  cell_method: minutely mean
+  instrument: Global Radiation (DShip)
+  long_name: longwave downward radiation
+  standard_name: net_downward_longwave_flux_in_air
+  units: W m-2
+  varname: lwr
+RSWS.RSSMC.SMCC:
+  cell_method: minutely mean
+  instrument: Pure sea water system (DShip)
+  long_name: sea water electrical conductivity
+  standard_name: sea_water_electrical_conductivity
+  units: S m-1
+  varname: conductivity
+RSWS.RSSMC.SMCChlA:
+  cell_method: minutely mean
+  instrument: Pure sea water system (DShip)
+  long_name: mass concentration of chlorophyll a in sea water
+  standard_name: mass_concentration_of_chlorophyll_a_in_sea_water
+  units: kg m-3
+  varname: chlorophyll_a
+RSWS.RSSMC.SMCS:
+  cell_method: minutely mean
+  instrument: Pure sea water system (DShip)
+  long_name: sea water salinity
+  standard_name: sea_water_practical_salinity
+  units: '1'
+  varname: salinity
+RSWS.RSSMC.SMCtr:
+  cell_method: minutely mean
+  instrument: Pure sea water system (DShip)
+  long_name: sea surface temperature (sensor depth 7m)
+  standard_name: sea_surface_temperature
+  units: K
+  varname: sst_7m
+SYS.CALC.SPEED_kmh:
+  cell_method: minutely mean
+  instrument: Seapath (DShip)
+  long_name: ship speed over ground
+  standard_name: platform_speed_wrt_ground
+  units: m s-1
+  varname: ship_speed
+SYS.STR.DPT:
+  cell_method: minutely mean
+  instrument: Hydro-acoustic system (DShip)
+  long_name: sea floor depth below sea surface
+  standard_name: sea_floor_depth_below_sea_surface
+  units: m
+  varname: sea_floor_depth
+SYS.STR.HDG:
+  cell_method: minutely mean
+  instrument: Gyro compass (DShip)
+  long_name: ship heading
+  standard_name: platform_orientation
+  units: degree
+  varname: ship_heading
+SYS.STR.PosLat:
+  axis: Y
+  cell_method: minutely mean
+  instrument: Seapath (DShip)
+  long_name: latitude
+  standard_name: latitude
+  units: degree_north
+  varname: lat
+SYS.STR.PosLon:
+  axis: X
+  cell_method: minutely mean
+  instrument: Seapath (DShip)
+  long_name: longitude
+  standard_name: longitude
+  units: degree_east
+  varname: lon
+Seapath.PSXN.Heave:
+  cell_method: minutely mean
+  instrument: Seapath (DShip)
+  long_name: ship heave
+  standard_name: platform_heave
+  units: m
+  varname: ship_heave
+Seapath.PSXN.Pitch:
+  cell_method: minutely mean
+  instrument: Seapath (DShip)
+  long_name: ship pitch
+  standard_name: platform_pitch
+  units: degree
+  varname: ship_pitch
+Seapath.PSXN.Roll:
+  cell_method: minutely mean
+  instrument: Seapath (DShip)
+  long_name: ship roll
+  standard_name: platform_roll
+  units: degree
+  varname: ship_roll
+Wamos.PWAM.Current_Direction:
+  instrument: Wamos (DShip)
+  long_name: sea water velocity to direction
+  standard_name: sea_water_velocity_to_direction
+  units: degree
+  varname: current_dir
+Wamos.PWAM.Current_Speed:
+  instrument: Wamos (DShip)
+  long_name: sea water speed
+  standard_name: sea_water_speed
+  units: m s-1
+  varname: current_speed
+Wamos.PWAM.Mean_Period:
+  instrument: Wamos (DShip)
+  long_name: sea surface wave mean period
+  standard_name: sea_surface_wave_mean_period
+  units: s
+  varname: wave_period
+Wamos.PWAM.Peak_Wave_Direction:
+  instrument: Wamos (DShip)
+  long_name: sea surface wave from direction
+  standard_name: sea_surface_wave_from_direction
+  units: degree
+  varname: wave_dir
+Wamos.PWAM.Peak_Wave_Length:
+  instrument: Wamos (DShip)
+  long_name: sea surface wave maximum wavelength
+  units: m
+  varname: wave_length
+Wamos.PWAM.Significant_Wave_Height:
+  instrument: Wamos (DShip)
+  long_name: sea surface wave significant height
+  standard_name: sea_surface_wave_significant_height
+  units: m
+  varname: wave_height
+Weatherstation.PEUMA.Absolute_wind_direction:
+  cell_method: minutely circular mean
+  instrument: Weatherstation (DShip)
+  long_name: wind direction (sensor height)
+  standard_name: wind_from_direction
+  units: degree
+  varname: wdir
+Weatherstation.PEUMA.Absolute_wind_speed:
+  cell_method: minutely mean
+  instrument: Weatherstation (DShip)
+  long_name: wind speed (sensor height)
+  standard_name: wind_speed
+  units: m s-1
+  varname: wspd
+Weatherstation.PEUMA.Air_pressure2:
+  cell_method: minutely mean
+  instrument: Weatherstation (DShip)
+  long_name: air pressure (sea level)
+  standard_name: air_pressure
+  units: Pa
+  varname: p_air
+Weatherstation.PEUMA.Air_temperature:
+  cell_method: minutely mean
+  instrument: Weatherstation (DShip)
+  long_name: air temperature (sensor height)
+  standard_name: air_temperature
+  units: K
+  varname: t_air
+Weatherstation.PEUMA.Humidity:
+  cell_method: minutely mean
+  instrument: Weatherstation (DShip)
+  long_name: relative humidity (sensor height)
+  standard_name: relative_humidity
+  units: '1'
+  varname: rh
+Weatherstation.PEUMA.Water_temperature:
+  cell_method: minutely mean
+  instrument: Weatherstation (DShip)
+  long_name: sea surface temperature (sensor depth 2m)
+  standard_name: sea_surface_temperature
+  units: K
+  varname: sst_2m

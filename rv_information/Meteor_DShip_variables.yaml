@@ -1,0 +1,72 @@
+SEAPATH.PSXN.Heave:
+  cell_method: minutely mean
+  instrument: Seapath (DShip)
+  long_name: ship heave
+  standard_name: platform_heave
+  units: m
+  varname: ship_heave
+SEAPATH.PSXN.Pitch:
+  cell_method: minutely mean
+  instrument: Seapath (DShip)
+  long_name: ship pitch
+  standard_name: platform_pitch
+  units: degree
+  varname: ship_pitch
+SEAPATH.PSXN.Roll:
+  cell_method: minutely mean
+  instrument: Seapath (DShip)
+  long_name: ship roll
+  standard_name: platform_roll
+  units: degree
+  varname: ship_roll
+SYS.CALC.SPEED_kmh:
+  cell_method: minutely mean
+  instrument: Seapath (DShip)
+  long_name: ship speed over ground
+  standard_name: platform_speed_wrt_ground
+  units: m s-1
+  varname: ship_speed
+SYS.STR.DPT:
+  cell_method: minutely mean
+  instrument: Seapath (DShip)
+  long_name: sea floor depth below sea surface
+  standard_name: sea_floor_depth_below_sea_surface
+  units: m
+  varname: sea_floor_depth
+SYS.STR.HDG:
+  cell_method: minutely mean
+  instrument: Gyro compass (DShip)
+  long_name: ship heading
+  standard_name: platform_orientation
+  units: degree
+  varname: ship_heading
+SYS.STR.PosLat:
+  axis: Y
+  cell_method: minutely mean
+  instrument: Seapath (DShip)
+  long_name: latitude
+  standard_name: latitude
+  units: degree_north
+  varname: lat
+SYS.STR.PosLon:
+  axis: X
+  cell_method: minutely mean
+  instrument: Seapath (DShip)
+  long_name: longitude
+  standard_name: longitude
+  units: degree_east
+  varname: lon
+WEATHER.PBWWI.GlobalRadiation:
+  cell_method: minutely mean
+  instrument: Global Radiation (DShip)
+  long_name: shortwave downward radiation
+  standard_name: net_downward_shortwave_flux_in_air
+  units: W m-2
+  varname: swr
+WEATHER.PBWWI.LwRadiation:
+  cell_method: minutely mean
+  instrument: Global Radiation (DShip)
+  long_name: longwave downward radiation
+  standard_name: net_downward_longwave_flux_in_air
+  units: W m-2
+  varname: lwr
