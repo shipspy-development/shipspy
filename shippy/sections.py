@@ -1,6 +1,7 @@
 import numpy as np
 import xarray as xr
 import pandas as pd
+import yaml
 
 
 def configure_sections_parser(parser):
@@ -37,6 +38,14 @@ def configure_sections_parser(parser):
         metavar="start_time",
         help="Name of dimension along which section is assigned",
         default="time",
+        required=False,
+    )
+    
+    parser.add_argument(
+        "-a",
+        "--attributes",
+        metavar="GLOBAL_ATTRIBUTES",
+        help="Dictionary with global attributes (yaml)",
         required=False,
     )
 
@@ -115,6 +124,12 @@ def run(args):
     campaign_start = np.datetime64(complete_period["dates"].values[1])
     campaign_end = np.datetime64(complete_period["dates"].values[3])
     ds = ds.sel({dim_name: slice(campaign_start, campaign_end)})
+    
+    if args.attributes is not None:
+        global_attrs_name = args.attributes
+        with open(global_attrs_name, 'r') as stream:
+            global_attrs = yaml.safe_load(stream)
+        ds.attrs = global_attrs
 
     ds.to_netcdf(
         outfilename,
