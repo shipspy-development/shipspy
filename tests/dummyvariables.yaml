@@ -1,0 +1,12 @@
+lat:
+  units: degree_north
+  varname: lat
+lon:
+  units: degree_east
+  varname: lon
+p:
+  units: Pa
+  varname: p_air
+t:
+  units: K
+  varname: t_air
