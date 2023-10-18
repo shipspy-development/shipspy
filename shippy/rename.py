@@ -37,10 +37,10 @@ def configure_rename_parser(parser):
     )
     
     parser.add_argument(
-        "-i", 
+        "-d", 
         "--instrument", 
         metavar="INSTRUMENT_NAME",
-        help="Instrument name, options are: calitoo, microtops, radiosondes",
+        help="Instrument/device name, options are: calitoo, microtops, radiosondes, ctd, radiosondes, test",
         required=True)
     
     parser.add_argument(
@@ -176,7 +176,7 @@ def get_units_new(variables_dict):
             continue
     return units_new
 
-def fix_units(ds, dict_old, dict_new):
+def fix_units(ds, units_old, units_new):
     """
     Convert old to new units
     """

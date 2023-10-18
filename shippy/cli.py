@@ -2,6 +2,7 @@ import logging
 
 from .sections import configure_sections_parser
 from .dship import configure_dship_parser
+from .rename import configure_rename_parser
 
 def get_parser():
     import argparse
@@ -23,6 +24,7 @@ def get_parser():
     subparsers = parser.add_subparsers(dest='subcommand')
     configure_sections_parser(subparsers.add_parser('sections'))
     configure_dship_parser(subparsers.add_parser('dship'))
+    configure_rename_parser(subparsers.add_parser('rename'))
 
     return parser
 
