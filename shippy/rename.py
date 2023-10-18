@@ -13,7 +13,7 @@ def configure_rename_parser(parser):
         "-i",
         "--inputfile",
         metavar="INPUT_FILE",
-        help="Postprocessed file",
+        help="Postprocessed input file",
         default=None,
         required=True,
     )
@@ -58,12 +58,12 @@ def import_data(filename, instrument):
     Import data and convert to xarray dataset
     """
     if instrument == 'calitoo':
-        ds = xr.open_dataset(inputfile, group= "Calitoo", decode_times = False)
+        ds = xr.open_dataset(filename, group= "Calitoo", decode_times = False)
     elif instrument == 'microtops':
-        series = pd.read_csv(inputfile, delimiter = ",", header = 4)
+        series = pd.read_csv(filename, delimiter = ",", header = 4)
         ds = series.to_xarray()
     elif instrument == 'dusttrak':
-        ds = xr.open_dataset(inputfile, group="DustTrak", decode_times=False)
+        ds = xr.open_dataset(filename, group="DustTrak", decode_times=False)
     elif instrument == 'radiosondes':
         if os.path.isfile(filename):
             ds = xr.open_dataset(filename)
@@ -200,8 +200,8 @@ def add_extras(ds, instrument):
 
         identifiers = []
         number = 0
-        for t in by_time.launch_time.values:
-            dz = by_time.sel(launch_time = t).dz.mean().values
+        for t in ds.launch_time.values:
+            dz = ds.sel(launch_time = t).dz.mean().values
             if dz > 0:
                 number = number + 1
                 ident = f'RS{int(number):03}_up'
@@ -249,16 +249,31 @@ def clean_up(ds, instrument):
         ds = ds.drop_vars(['sounding'])
     return ds
 
+def save_nc(ds, outfile, instrument):
+    """
+    Save dataset to netCDF file with time encoding
+    """
+    if instrument == 'ctd':
+        for v in list(ds.coords):
+            ds[v].encoding = {}
+        for v in list(ds.data_vars):
+            ds[v].encoding = {}
+        ds.to_netcdf(outfile, encoding={'start_time': {'dtype': '<i4'}})
+    elif instrument == 'radiosondes':
+        ds.to_netcdf(outfile)
+    else:
+        ds.to_netcdf(outfile, encoding={'time': {'dtype': '<i4'}})
+
 def run(args):
     attrs_file = args.attributes
-    inputfile = args.inputfile
+    infilename = args.inputfile
     instrument = args.instrument
     outfile = args.outputfile
     
     with open(attrs_file, 'r') as stream:
         variables_dict = yaml.safe_load(stream)
 
-    ds = import_data(inputfile, instrument)
+    ds = import_data(infilename, instrument)
     ds = fix_times(ds, instrument)
 
     old_attrs = keep_old_attrs(ds)
@@ -271,4 +286,4 @@ def run(args):
     ds = fix(ds, instrument)
     ds = clean_up(ds, instrument)
     
-    ds.to_netcdf(outfile, encoding={'time': {'dtype': '<i4'}})
+    save_nc(ds, outfile, instrument)
