@@ -14,5 +14,6 @@ def test_section():
     assert set(ds.data_vars) == set(out.data_vars)
     assert "section" in out.coords
     assert set(ds.coords) == set(out.coords) - {'section'}
+    assert ds.time[0] < out.time[0]
     
     os.system("rm tests/testsection_output.nc")

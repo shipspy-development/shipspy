@@ -1,7 +1,7 @@
 campaign_start:
-2023-01-25T00:00:00
+2023-09-06T01:00:00
 campaign_end: 
-2023-01-26T00:00:00
+2023-09-06T12:00:00
 cutout_start;cutout_end
 section_number;section_cuts
-1;2023-01-25T11:15:03
+1;2023-09-06T06:00:00
