@@ -39,7 +39,7 @@ def configure_dship_parser(parser):
         "-s", 
         "--ship", 
         metavar="Merian, Sonne, or Meteor",
-        help="Ship name where the data comes from. Options are Merian, Sonne, Meteor.",
+        help="Ship name where the data comes from. Options are Merian, Sonne, Meteor, Test.",
         required=True)
     
     parser.add_argument(
@@ -81,7 +81,7 @@ def remove_fill_vals(ds, ship, var):
     Remove fill values. For Sonne, fill value is 9.
     Also remove unphysical values.
     """
-    if ship in ['Sonne', 'Meteor']:
+    if ship in ['Sonne', 'Meteor', 'Test']:
         ds[var] = ds[var].where(ds[var] != 9.0, other = np.nan)
     if (ship == 'Merian')&(var == 'sst_7m'):
         ds[var] = ds[var].where(ds[var] != 0, other = np.nan)
@@ -107,6 +107,7 @@ def fix(ds, ship, var):
         ds[var] = ds[var].pint.to('kg/m^3') #convert 10^-6kg/m^3 to kg/m^3
     if var == 'ship_speed':
         ds[var] = ds[var].pint.to('m/s') #convert to m/s
+    ds = ds.pint.dequantify()
     return ds
 
 def var_ordering(ship):
@@ -116,10 +117,11 @@ def var_ordering(ship):
         ordering = ['t_air', 'p_air', 'wspd', 'wdir', 'rh', 'lwr', 'swr', 'sea_floor_depth', 'sst_2m', 'sst_4m', 'conductivity', 'salinity', 'chlorophyll', 'ship_speed', 'ship_heading', 'ship_heave', 'ship_heave_std', 'ship_pitch', 'ship_pitch_std', 'ship_roll', 'ship_roll_std']
     elif ship == 'Meteor':
         ordering = ['lwr', 'swr', 'sea_floor_depth', 'ship_speed', 'ship_heading', 'ship_heave', 'ship_heave_std', 'ship_pitch', 'ship_pitch_std', 'ship_roll', 'ship_roll_std']
+    elif ship == 'Test':
+        ordering = ['t_air', 'p_air']
     return ordering
     
 def run(args):
-    # Define input file
     fn = args.inputfile
     outname = args.outputfile
     ship_name = args.ship
@@ -170,17 +172,20 @@ def run(args):
     dship_data['time'] = timestamps
     dship_sec = dship_data.set_index('time').to_xarray()
     
-    if units_dict[varname_swap['salinity']] == 'PSU':
-        units_dict[varname_swap['salinity']] = 'g/kg'
+    if 'salinity' in varname_swap:
+        if units_dict[varname_swap['salinity']] == 'PSU':
+            units_dict[varname_swap['salinity']] = 'g/kg'
         
     for v in dship_sec.keys():
         dship_sec[v].attrs["units"] = units_dict[varname_swap[v]]
+        
+    for v in varname_swap.keys():
+        dship_sec = remove_fill_vals(dship_sec, ship_name, v)
     
     dship_sec = dship_sec.pint.quantify(unit_registry=units)
     
     for v in varname_swap.keys():
-        prepare_data = remove_fill_vals(dship_sec, ship_name, v)
-        minutely_data = min_means(prepare_data, v)
+        minutely_data = min_means(dship_sec, v)
         minutely_data = fix(minutely_data, ship_name, v)
         minutely_data = get_attrs(minutely_data, v)
         if v == list(varname_swap.keys())[0]:
@@ -189,6 +194,8 @@ def run(args):
             dship = xr.merge([dship, minutely_data])
             
     for v in list(['ship_heave', 'ship_roll', 'ship_pitch']):
+        if ship_name == 'Test':
+            break
         stdname = std_dict[v]['varname']
         prepare_data = remove_fill_vals(dship_sec, ship_name, v)
         minutely_data = min_std(prepare_data, v)
@@ -201,4 +208,4 @@ def run(args):
     dship = dship.set_coords(['lat', 'lon'])
     dship = dship[var_ordering(ship_name)]
     
-    dship.pint.dequantify().to_netcdf(outname, encoding={'time': {'dtype': '<i4'}})
+    dship.to_netcdf(outname, encoding={'time': {'dtype': '<i4'}})
