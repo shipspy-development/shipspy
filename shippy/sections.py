@@ -131,7 +131,7 @@ def run(args):
 
     ds.to_netcdf(
         outfilename,
-        encoding={
-            dim_name: {"dtype": "<i4", "units": f"seconds since {campaign_start}"}
-        },
+#        encoding={
+#            dim_name: {"dtype": "<i4", "units": f"seconds since {campaign_start}"}
+#        },
     )

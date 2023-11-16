@@ -183,7 +183,6 @@ def run(args):
         dship_sec = remove_fill_vals(dship_sec, ship_name, v)
     
     dship_sec = dship_sec.pint.quantify(unit_registry=units)
-    
     for v in varname_swap.keys():
         minutely_data = min_means(dship_sec, v)
         minutely_data = fix(minutely_data, ship_name, v)
@@ -204,8 +203,8 @@ def run(args):
         del attrs['varname']
         minutely_data[stdname].attrs = attrs
         dship = xr.merge([dship, minutely_data])
-    
+
     dship = dship.set_coords(['lat', 'lon'])
     dship = dship[var_ordering(ship_name)]
-    
-    dship.to_netcdf(outname, encoding={'time': {'dtype': '<i4'}})
+    dship = dship.pint.dequantify()
+    dship.to_netcdf(outname)

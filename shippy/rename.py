@@ -40,7 +40,7 @@ def configure_rename_parser(parser):
         "-d", 
         "--instrument", 
         metavar="INSTRUMENT_NAME",
-        help="Instrument/device name, options are: calitoo, microtops, radiosondes, ctd, radiosondes, test",
+        help="Instrument/device name, options are: calitoo, microtops, radiosondes, ctd, radiosondes, uav, hatpro, test",
         required=True)
     
     parser.add_argument(
@@ -111,7 +111,7 @@ def get_units_old(ds, instrument):
             if ds[v].attrs['units'] == '-':
                 units_old[v] = 'dimensionless'
             elif ds[v].attrs['units'] == 'Dobson Units':
-                units_old[v] = '4.4615 mmol/m^2'
+                units_old[v] = '0.44615 mmol/m^2'
             elif ds[v].attrs['units'] == 'degrees C':
                 units_old[v] = 'degC'
             else:
@@ -153,12 +153,23 @@ def get_units_old(ds, instrument):
                 if v == 'alt_bnds':
                     unit = 'm'
             units_old[v] = unit
+    elif instrument == 'uav':
+        for v in list(ds.keys()):
+            try:
+                unit = ds[v].attrs['units']
+                if unit == '1':
+                    unit = 'dimensionless'
+            except KeyError:
+                unit = 'dimensionless'
+            units_old[v] = unit
     else:
         for v in list(ds.keys()):
             try:
                 unit = ds[v].attrs['units']
                 if unit == '1':
                     unit = 'dimensionless'
+                if unit == '%':
+                    unit = 'percent'
                 units_old[v] = unit
             except KeyError:
                 continue
@@ -213,9 +224,15 @@ def add_extras(ds, instrument):
             dz_old = dz
 
         ds = ds.assign_coords(identifier = ('launch_time', np.array(identifiers)))
+    if instrument == 'uav':
+        identifiers = []
+        for number in np.arange(len(ds.start_time)) :
+            ident = f'UAV{int(number):03}'
+            identifiers.append(ident)
+        ds = ds.assign_coords(identifier = ('start_time', np.array(identifiers)))
     return ds
 
-def put_attrs(ds, variable_dict, old_attrs):
+def put_attrs(ds, variable_dict, old_attrs, instrument):
     """
     Add attributes to variables
     """
@@ -223,6 +240,8 @@ def put_attrs(ds, variable_dict, old_attrs):
     for v in variable_dict.keys():
         attrs = variable_dict[v]
         try:
+            if instrument == 'uav':
+                del old_attrs[v]["standard_name"]
             attrs = old_attrs[v] | attrs
         except KeyError:
             continue
@@ -237,6 +256,9 @@ def fix(ds, instrument):
     """
     if instrument == 'microtops':
         ds['angstrom_exp'] = ds.angstrom_exp.where(ds.angstrom_exp > 0, other = np.nan) #remove unphysical (negative) values
+    if instrument in ['uav', 'hatpro', 'radiosondes']:
+        ds['rh'] = ds.rh.where(ds.rh < 1.0, other = np.nan) #remove unphysical rh > 1
+        ds['rh'] = ds.rh.where(ds.rh >= 0.0, other = np.nan) #remove unphysical nergative rh
     return ds
 
 def clean_up(ds, instrument):
@@ -258,11 +280,9 @@ def save_nc(ds, outfile, instrument):
             ds[v].encoding = {}
         for v in list(ds.data_vars):
             ds[v].encoding = {}
-        ds.to_netcdf(outfile, encoding={'start_time': {'dtype': '<i4'}})
-    elif instrument == 'radiosondes':
         ds.to_netcdf(outfile)
     else:
-        ds.to_netcdf(outfile, encoding={'time': {'dtype': '<i4'}})
+        ds.to_netcdf(outfile)
 
 def run(args):
     attrs_file = args.attributes
@@ -282,7 +302,7 @@ def run(args):
 
     ds = fix_units(ds, units_old, units_new)
     ds = add_extras(ds, instrument)
-    ds = put_attrs(ds, variables_dict, old_attrs)
+    ds = put_attrs(ds, variables_dict, old_attrs, instrument)
     ds = fix(ds, instrument)
     ds = clean_up(ds, instrument)
     

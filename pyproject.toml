@@ -6,6 +6,19 @@ authors = [
 ]
 version = "0.0.1"
 
+dependencies = [
+    "xarray",
+    "numpy",
+    "metpy",
+    "scipy",
+    "pyyaml",
+    "netcdf4",
+    "datetime",
+    "dask",
+    "pint_xarray",
+]
+
+
 [project.optional-dependencies]
 tests = [
     "pytest",
