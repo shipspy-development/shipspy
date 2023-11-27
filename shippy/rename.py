@@ -40,7 +40,7 @@ def configure_rename_parser(parser):
         "-d", 
         "--instrument", 
         metavar="INSTRUMENT_NAME",
-        help="Instrument/device name, options are: calitoo, microtops, radiosondes, ctd, radiosondes, uav, hatpro, test",
+        help="Instrument/device name, options are: calitoo, microtops, ctd, radiosondes, uav, hatpro, test",
         required=True)
     
     parser.add_argument(
