@@ -3,6 +3,8 @@ import logging
 from .sections import configure_sections_parser
 from .dship import configure_dship_parser
 from .rename import configure_rename_parser
+from ._version import __version__
+
 
 def get_parser():
     import argparse
@@ -18,6 +20,12 @@ def get_parser():
         help="Set the level of verbosity [DEBUG, INFO, WARNING, ERROR]",
         required=False,
         default="INFO",
+    )
+    parser.add_argument(
+        "-V",
+        "--version",
+        action="version",
+        version=__version__,
     )
 
     parser.set_defaults(func=None)

@@ -4,7 +4,7 @@ description = "processing of ship campaign data"
 authors = [
     {name = "Laura Köhler", email = "laura.koehler@mpimet.mpg.de"},
 ]
-version = "0.0.1"
+dynamic = ["version"]
 
 dependencies = [
     "xarray",
@@ -27,6 +27,12 @@ tests = [
 
 [project.scripts]
 shippy = "shippy.cli:main"
+
+[tool.setuptools]
+packages = ["shippy"]
+
+[tool.setuptools.dynamic]
+version = {attr = "shippy.__version__"}
 
 [tool.pytest.ini_options]
 minversion = "6.0"
