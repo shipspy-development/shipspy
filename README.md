@@ -9,16 +9,6 @@ Install shippy (coming soon):
 ```
 pip install shippy
 ```
-For development (???):
-```
-# Install dependencies
-pipenv install --dev
-
-# Setup pre-commit and pre-push hooks
-pipenv run pre-commit install -t pre-commit
-pipenv run pre-commit install -t pre-push
-```
-
 ## Using shippy
 
 The following processing options are available.
