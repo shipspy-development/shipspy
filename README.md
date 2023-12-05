@@ -49,7 +49,7 @@ with
 * `input file`: input file, file format depends on the instrument
 * `output file`: file name of netCDF output file
 * `attribute dictionary`: yaml dictionary with variable names and attribute. For examples see [[1]](https://github.com/LauraKoehler/arc_processing)
-* `instrument`: instrument name. Options are `calitoo`, 'ceilometer', `ctd`, `hatpro`, `microtops`, `radiosondes`, `test`, `uav`
+* `instrument`: instrument name. Options are `calitoo`, `ceilometer`, `ctd`, `hatpro`, `microtops`, `radiosondes`, `test`, `uav`
 
 ### Sections
 
