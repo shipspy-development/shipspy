@@ -3,8 +3,8 @@ message: "If you use this software, please cite it as below."
 authors:
 - family-names: "Köhler"
   given-names: "Laura"
-title: "shippy"
-repository-code: "https://github.com/shippy-development/shippy"
+title: "shipspy"
+repository-code: "https://github.com/shipspy-development/shipspy"
 abstract: "shipspy: ship campaign data processing and standardisation"
 version: 0.0.1
 date-released: '2023-11-28'
