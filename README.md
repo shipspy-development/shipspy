@@ -1,15 +1,15 @@
-# shippy: ship campaign data processing and standardisation
+# shipspy: ship campaign data processing and standardisation
 
-With shippy, data from ship campaigns can be processed and standardised. A number of instruments are included.
+With shipspy, data from ship campaigns can be processed and standardised. A number of instruments are included.
 
 ## Setup
 
-Install shippy (coming soon):
+Install shipspy (coming soon):
 
 ```
-pip install shippy
+pip install shipspy
 ```
-## Using shippy
+## Using shipspy
 
 The following processing options are available.
 
@@ -24,7 +24,7 @@ With the dship subcommand, data from the ship integrated system can be processed
 
 To process dship data run
 ```
-shippy dship -i <input file> -o <output file> -a <attribute dictionary> -s <ship>
+shipspy dship -i <input file> -o <output file> -a <attribute dictionary> -s <ship>
 ```
 with
 * `input file`: downloaded data from BSH or GEOMAR (or directly from the ship) as txt or dat file with unix time stamp (seconds since 1970-01-01)
@@ -43,7 +43,7 @@ The rename command can be used to
 
 To rename a data file run
 ```
-shippy rename -i <input file> -o <output file> -a <attribute dictionary> -d <instrument>
+shipspy rename -i <input file> -o <output file> -a <attribute dictionary> -d <instrument>
 ```
 with 
 * `input file`: input file, file format depends on the instrument
@@ -55,7 +55,7 @@ with
 
 The section command adds a new coordinate and specifies the time period of the campaign. To use it run
 ```
-shippy section -i <input file> -o <output file> -s <section file> -t <time dimension name> -a <global attribute dictionary>
+shipspy section -i <input file> -o <output file> -s <section file> -t <time dimension name> -a <global attribute dictionary>
 ```
 with
 * `input file`: input netCDF file

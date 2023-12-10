@@ -5,6 +5,6 @@ authors:
   given-names: "Laura"
 title: "shippy"
 repository-code: "https://github.com/shippy-development/shippy"
-abstract: "shippy: ship campaign data processing and standardisation"
+abstract: "shipspy: ship campaign data processing and standardisation"
 version: 0.0.1
 date-released: '2023-11-28'

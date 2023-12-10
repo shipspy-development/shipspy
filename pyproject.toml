@@ -1,5 +1,5 @@
 [project]
-name = "shippy"
+name = "shipspy"
 description = "processing of ship campaign data"
 authors = [
     {name = "Laura Köhler", email = "laura.koehler@mpimet.mpg.de"},
@@ -26,13 +26,13 @@ tests = [
 ]
 
 [project.scripts]
-shippy = "shippy.cli:main"
+shipspy = "shipspy.cli:main"
 
 [tool.setuptools]
-packages = ["shippy"]
+packages = ["shipspy"]
 
 [tool.setuptools.dynamic]
-version = {attr = "shippy.__version__"}
+version = {attr = "shipspy.__version__"}
 
 [tool.pytest.ini_options]
 minversion = "6.0"

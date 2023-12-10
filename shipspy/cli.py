@@ -10,7 +10,7 @@ def get_parser():
     import argparse
 
     parser = argparse.ArgumentParser(
-            formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
 
     parser.add_argument(
@@ -29,20 +29,21 @@ def get_parser():
     )
 
     parser.set_defaults(func=None)
-    subparsers = parser.add_subparsers(dest='subcommand')
-    configure_sections_parser(subparsers.add_parser('sections'))
-    configure_dship_parser(subparsers.add_parser('dship'))
-    configure_rename_parser(subparsers.add_parser('rename'))
+    subparsers = parser.add_subparsers(dest="subcommand")
+    configure_sections_parser(subparsers.add_parser("sections"))
+    configure_dship_parser(subparsers.add_parser("dship"))
+    configure_rename_parser(subparsers.add_parser("rename"))
 
     return parser
+
 
 def main():
     args = get_parser().parse_args()
 
     logging.basicConfig(level=logging.getLevelName(args.verbose))
-    
-    return(args.func(args))
+
+    return args.func(args)
+
 
 if __name__ == "__main__":
     exit(main())
-
