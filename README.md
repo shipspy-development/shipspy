@@ -4,7 +4,7 @@ With shipspy, data from ship campaigns can be processed and standardised. A numb
 
 ## Setup
 
-Install shipspy (coming soon):
+Install shipspy:
 
 ```
 pip install shipspy
