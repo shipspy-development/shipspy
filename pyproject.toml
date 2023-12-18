@@ -4,6 +4,7 @@ description = "processing of ship campaign data"
 authors = [
     {name = "Laura Köhler", email = "laura.koehler@mpimet.mpg.de"},
 ]
+readme = "README.md"
 dynamic = ["version"]
 
 dependencies = [
