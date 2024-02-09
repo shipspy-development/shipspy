@@ -41,7 +41,7 @@ def configure_rename_parser(parser):
         "-d",
         "--instrument",
         metavar="INSTRUMENT_NAME",
-        help="Instrument/device name, options are: calitoo, microtops, ctd, radiosondes, uav, hatpro, ceilometer, test",
+        help="Instrument/device name, options are: calitoo, microtops, ctd, radiosondes, uav, uav_ocean, hatpro, ceilometer, dusttrak, test",
         required=True,
     )
 
@@ -263,6 +263,12 @@ def add_extras(ds, instrument):
             ident = f"UAV{int(number):03}"
             identifiers.append(ident)
         ds = ds.assign_coords(identifier=("start_time", np.array(identifiers)))
+    if instrument == "uav_ocean":
+        identifiers = []
+        for number in np.arange(len(ds.start_time)):
+            ident = f"UAV_ocean{int(number):03}"
+            identifiers.append(ident)
+        ds = ds.assign_coords(identifier=("start_time", np.array(identifiers)))
     return ds
 
 
@@ -278,9 +284,18 @@ def put_attrs(ds, variable_dict, old_attrs, instrument):
         try:
             if instrument == "uav":
                 del old_attrs[v]["standard_name"]
+            if instrument in ["calitoo", "dusttrak"]:
+                if "ValidMin" in old_attrs[v].keys():
+                    del old_attrs[v]["ValidMin"]
+                if "ValidMax" in old_attrs[v].keys():
+                    del old_attrs[v]["ValidMax"]
+            if instrument in ["ctd", "uav_ocean"]:
+                if "span" in old_attrs[v].keys():
+                    del old_attrs[v]["span"]
             attrs = old_attrs[v] | attrs
         except KeyError:
-            continue
+            attrs = attrs
+        #            continue
         del attrs["varname"]
         ds[v].attrs = attrs
     ds = ds.rename(varname_dic)
