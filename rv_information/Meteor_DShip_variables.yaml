@@ -26,20 +26,6 @@ SYS.CALC.SPEED_kmh:
   standard_name: platform_speed_wrt_ground
   units: m s-1
   varname: ship_speed
-SYS.STR.DPT:
-  cell_method: minutely mean
-  instrument: Seapath (DShip)
-  long_name: sea floor depth below sea surface
-  standard_name: sea_floor_depth_below_sea_surface
-  units: m
-  varname: sea_floor_depth
-SYS.STR.HDG:
-  cell_method: minutely mean
-  instrument: Gyro compass (DShip)
-  long_name: ship heading
-  standard_name: platform_orientation
-  units: degree
-  varname: ship_heading
 SYS.STR.PosLat:
   axis: Y
   cell_method: minutely mean
@@ -56,6 +42,20 @@ SYS.STR.PosLon:
   standard_name: longitude
   units: degree_east
   varname: lon
+SEAPATH.PSXN.Heading:
+  cell_method: 1-minute mean
+  instrument:  Seapath (DShip)
+  long_name: ship heading
+  standard_name: platform_orientation
+  units: degree
+  varname: ship_heading
+SYS.STR.DPT:
+  cell_method: 1-minute mean
+  instrument: Hydro-acoustic system (DShip)
+  long_name: sea floor depth below sea surface
+  standard_name: sea_floor_depth_below_sea_surface
+  units: m
+  varname: sea_floor_depth
 WEATHER.PBWWI.GlobalRadiation:
   cell_method: minutely mean
   instrument: Global Radiation (DShip)
@@ -70,3 +70,199 @@ WEATHER.PBWWI.LwRadiation:
   standard_name: net_downward_longwave_flux_in_air
   units: W m-2
   varname: lwr
+TSG1.SBE21.Salinity:
+  cell_method: minutely mean
+  instrument: Thermosalinograph SBE21(DShip)
+  long_name: sea water practical salinity at port
+  standard_name: sea_water_salinity
+  units: PSU
+  varname: so_port
+WEATHER.PBWWI.AirPress:
+  cell_method: minutely mean
+  instrument: Weatherstation (DShip)
+  long_name: Air pressure (sea level)
+  standard_name: air_pressure
+  units: Pa
+  varname: p_air
+WEATHER.PBWWI.AirTempPort:
+  cell_method: minutely mean
+  instrument: Weatherstation (DShip)
+  long_name: Air temperature at port
+  standard_name: air_temperature
+  units: K
+  varname: t_air_port
+WEATHER.PBWWI.HumidityPort:
+  cell_method: minutely mean
+  instrument: Weatherstation (DShip)
+  long_name: relative humidity at port
+  standard_name: relative_humidity
+  units: '1'
+  varname: rh_port
+WEATHER.PBWWI.WaterTempPort:
+  cell_method: minutely mean
+  instrument: Weatherstation (DShip)
+  long_name: sea surface temperature at port
+  standard_name: sea_surface_temperature
+  units: K
+  varname: sst_port
+TSG1.SBE21.TempExtern:
+  cell_method: minutely mean
+  instrument: Thermosalinograph SBE21(DShip)
+  long_name: sea surface temperature extern at port
+  standard_name: sea_surface_temperature
+  units: K
+  varname: sst_extern_port
+TSG1.SBE21.Temperature:
+  cell_method: minutely mean
+  instrument: Thermosalinograph SBE21(DShip)
+  long_name: sea surface temperature intern at port
+  standard_name: sea_surface_temperature
+  units: K
+  varname: sst_intern_port
+WEATHER.PBWWI.TrueWindDir:
+  cell_method: minutely circular mean
+  instrument: Weatherstation (DShip)
+  long_name: wind direction
+  standard_name: wind_direction
+  units: degree
+  varname: wdir
+WEATHER.PBWWI.TrueWindSpeed:
+  cell_method: minutely mean
+  instrument: Weatherstation (DShip)
+  long_name: wind speed
+  standard_name: wind_speed
+  units: m s-1
+  varname: wspd
+TSG1.SBE21.Density:
+  cell_method: minutely mean
+  instrument: Thermosalinograph SBE21(DShip)
+  long_name: sea surface density at port
+  standard_name: sea_surface_density
+  units: kg m-3
+  varname: rho_port
+TSG2.SBE21.Density:
+  cell_method: minutely mean
+  instrument: Thermosalinograph SBE21(DShip)
+  long_name: sea surface density at starboard
+  standard_name: sea_surface_density
+  units: kg m-3
+  varname: rho_board
+TSG2.SBE21.Salinity:
+  cell_method: minutely mean
+  instrument: Thermosalinograph SBE21(DShip)
+  long_name: sea water practical salinity at starboard
+  standard_name: sea_water_salinity
+  units: PSU
+  varname: so_board
+TSG2.SBE21.TempExtern:
+  cell_method: minutely mean
+  instrument: Thermosalinograph SBE21(DShip)
+  long_name: sea surface temperature extern at starboard
+  standard_name: sea_surface_temperature
+  units: K
+  varname: sst_extern_board
+TSG2.SBE21.Temperature:
+  cell_method: minutely mean
+  instrument: Thermosalinograph SBE21(DShip)
+  long_name: sea surface temperature intern at starboard
+  standard_name: sea_surface_temperature
+  units: K
+  varname: sst_intern_board
+WEATHER.PBWWI.AirTempStarboard:
+  cell_method: minutely mean
+  instrument: Weatherstation (DShip)
+  long_name: Air temperature at starboard
+  standard_name: air_temperature
+  units: K
+  varname: t_air_board
+WEATHER.PBWWI.DewPointPort:
+  cell_method: minutely mean
+  instrument: Weatherstation (DShip)
+  long_name: Dew point temperature at port
+  standard_name: dew_point_temperature
+  units: K
+  varname: td_port
+WEATHER.PBWWI.DewPointStarboard:
+  cell_method: minutely mean
+  instrument: Weatherstation (DShip)
+  long_name: Dew point temperature at starboard
+  standard_name: dew_point_temperature
+  units: K
+  varname: td_board
+WEATHER.PBWWI.HumidityStarboard:
+  cell_method: minutely mean
+  instrument: Weatherstation (DShip)
+  long_name: relative humidity at starboard
+  standard_name: relative_humidity
+  units: '1'
+  varname: rh_board
+WEATHER.PBWWI.PyrradiometerTemp:
+  cell_method: minutely mean
+  instrument: Weatherstation Pyrradiometer (DShip)
+  long_name: sensor temperature
+  standard_name: sensor temperature
+  units: K
+  varname: t_sensor
+WEATHER.PBWWI.UvRadiation:
+  cell_method: minutely mean
+  instrument: Weather UV Radiometer (DShip)
+  long_name: Ultraviolet Radiation
+  standard_name: ultraviolet_radiation
+  units: mW m-2
+  varname: uv
+WEATHER.PBWWI.WaterTempStarboard:
+  cell_method: minutely mean
+  instrument: Weatherstation (DShip)
+  long_name: sea surface temperature at starboard
+  standard_name: sea_surface_temperature
+  units: K
+  varname: sst_board
+WEATHER.PBWWI.RealWindDir:
+  cell_method: minutely circular mean
+  instrument: Weatherstation (DShip)
+  long_name: relative wind direction
+  standard_name: relative_wind_direction
+  units: degree
+  varname: wdir_rel
+WEATHER.PBWWI.TrueWindSpeedKN:
+  cell_method: minutely mean
+  instrument: Weatherstation (DShip)
+  long_name: wind speed
+  standard_name: wind_speed
+  units: kn
+  varname: wspd_kn
+WEATHER.PBWWI.RelWindSpeed:
+  cell_method: minutely mean
+  instrument: Weatherstation (DShip)
+  long_name: relative wind speed
+  standard_name: relative_wind_speed
+  units: m s-1
+  varname: wspd_rel
+WEATHER.PBWWI.RelWindSpeedKN:
+  cell_method: minutely mean
+  instrument: Weatherstation (DShip)
+  long_name: relative wind speed
+  standard_name: relative_wind_speed
+  units: kn
+  varname: wspd_rel_kn
+DUST_MONITOR.DUST.PM1:
+  cell_method: minutely mean
+  instrument: Dust Monitor (DShip)
+  long_name: Particulate Matter with diameter less than 1 um 
+  standard_name: PM1
+  units: ug m-3
+  varname: PM1
+DUST_MONITOR.DUST.PM10:
+  cell_method: minutely mean
+  instrument: Dust Monitor (DShip)
+  long_name: Particulate Matter with diameter less than 10 um 
+  standard_name: PM10
+  units: ug m-3
+  varname: PM10
+DUST_MONITOR.DUST.PM25:
+  cell_method: minutely mean
+  instrument: Dust Monitor (DShip)
+  long_name: Particulate Matter with diameter less than 2.5 um 
+  standard_name: PM2.5
+  units: ug m-3
+  varname: PM2p5
