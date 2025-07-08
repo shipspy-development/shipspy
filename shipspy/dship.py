@@ -71,7 +71,7 @@ def min_means(ds, var):
     Calculate minutely means
     For wind speed and heading, circular means are calculated
     """
-    if var in list(["wdir", "ship_heading"]):
+    if var in list(["wdir", "ship_heading", "wdir_rel"]):
         var_mean = (
             circ_mean(
                 ds[var]
@@ -83,7 +83,7 @@ def min_means(ds, var):
             .to_dataset()
         )
     else:
-        var_mean = ds[[var]].resample(time="min").mean()
+        var_mean = ds[var].resample(time="min").mean().to_dataset()
     return var_mean
 
 
@@ -115,7 +115,7 @@ def fix(ds, ship, var):
     """
     Fixes on variables
     """
-    if var in ["t_air", "sst_2m", "sst_7m", "sst_4m", "sst_3m"]:
+    if var in ["t_air","t_air_port","t_air_board","sst_port","sst_intern_port","sst_extern_port","sst_board","sst_intern_board","sst_extern_board","td_port","td_board","sst_2m", "sst_7m", "sst_4m", "sst_3m"]:
         ds[var] = ds[var].pint.to("kelvin")  # convert deg Celcius to K
     if var == "p_air":
         ds[var] = ds[var].pint.to("pascal")  # convert hPa to Pa
@@ -188,11 +188,39 @@ def var_ordering(ship):
         ]
     elif ship == "Meteor":
         ordering = [
+            "sst_port",
+            "sst_extern_port",
+            "sst_intern_port",
+            "sst_board",
+            "sst_extern_board",
+            "sst_intern_board",
+            "wdir",
+            "wspd",
+            "wdir_rel",
+            "wspd_rel",
+            "wspd_kn",
+            "wspd_rel_kn",
+            "rh_port",
+            "rh_board",
+            "t_air_port",
+            "t_air_board",
+            "td_port",
+            "td_board",
+            "p_air",
             "lwr",
             "swr",
+            "uv",
+            "PM1",
+            "PM10",
+            "PM2p5",
+            "t_sensor",
+            "so_port",
+            "so_board",
+            "rho_port",
+            "rho_board",
             "sea_floor_depth",
-            "ship_speed",
             "ship_heading",
+            "ship_speed",
             "ship_heave",
             "ship_heave_std",
             "ship_pitch",
@@ -279,7 +307,6 @@ def run(args):
     dship_data = dship_data.astype("float", errors="ignore")
     dship_data["time"] = timestamps
     dship_sec = dship_data.set_index("time").to_xarray()
-
     if "salinity" in varname_swap:
         if units_dict[varname_swap["salinity"]] == "PSU":
             units_dict[varname_swap["salinity"]] = "g/kg"
