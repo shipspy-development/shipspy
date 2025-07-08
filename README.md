@@ -55,7 +55,7 @@ with
 
 The section command adds a new coordinate and specifies the time period of the campaign. To use it run
 ```
-shipspy section -i <input file> -o <output file> -s <section file> -t <time dimension name> -a <global attribute dictionary>
+shipspy sections -i <input file> -o <output file> -s <section file> -t <time dimension name> -a <global attribute dictionary>
 ```
 with
 * `input file`: input netCDF file
