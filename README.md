@@ -66,5 +66,22 @@ with
 
 The [repository [1]](https://github.com/LauraKoehler/arc_processing) with the settings for the ARC and additional scripts can serve as a template.
 
+### PAMOS
+
+The pamos command can be used to process data from the instrument PAMOS (Portable Atmospheric Measurement box On Sea) which is particularly developed for (commercial) vessels. To you it run
+```
+shipspy pamos -i <input directory> -o <output file> -a <attribute dictionary> -c <header file> -f <quality flag dictionary> -e <additional attribute dictionary>
+```
+with
+* `input directory`: input directory, where the raw data files are stored
+* `output file`: file name of netCDF output file
+* `attribute dictionary`: yaml dictionary with variable names and attribute.
+* `header file`: text file which defines the columns of the raw data files. For an example, see [2].
+* `quality flag dictionary`: optional yaml dictionary to be used to assess the quality flags. For an example see [2].
+* `additional attribute dictionary`: optional yaml dictionary with extra variables like quality and pump flags.
+
+The repository [2] with the settings for PAMOS on the MS Fridtjof Nansen can serve as a template.
+
 # References
 [1] Köhler, L. (2023). ARC: Processing of atmospheric and oceanographic measurements (Version v1.0.0) [Computer software]. https://github.com/LauraKoehler/arc_processing
+[2] tba
