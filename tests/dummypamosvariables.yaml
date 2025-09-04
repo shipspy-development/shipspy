@@ -1,0 +1,32 @@
+lat:
+  units: degree
+  units_old: 0.01*degree
+  varname: lat
+lat_or:
+  units: '1'
+  units_old: '1'
+  varname: lat_or
+lon:
+  units: degree
+  units_old: 0.01*degree
+  varname: lon
+lon_or:
+  units: '1'
+  units_old: '1'
+  varname: lon_or
+p:
+  units: Pa
+  units_old: hPa
+  varname: p_air
+t:
+  units: K
+  units_old: degC
+  varname: t_air
+number:
+  units: m-3
+  units_old: cm-3
+  varname: number_conc
+precip_acc:
+  units: m
+  units_old: mm
+  varname: precip_acc
