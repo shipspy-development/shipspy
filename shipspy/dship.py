@@ -39,7 +39,7 @@ def configure_dship_parser(parser):
     parser.add_argument(
         "-s",
         "--ship",
-        metavar="Merian, Sonne, or Meteor",
+        metavar="Merian, Sonne, Meteor, or Test",
         help="Ship name where the data comes from. Options are Merian, Sonne, Meteor, Test.",
         required=True,
     )
@@ -84,6 +84,7 @@ def min_means(ds, var):
         )
     else:
         var_mean = ds[var].resample(time="min").mean().to_dataset()
+        var_mean = var_mean.pint.quantify(units={var: ds[var].pint.units})
     return var_mean
 
 
@@ -313,13 +314,13 @@ def run(args):
     if "ship_speed" in varname_swap:
         if units_dict[varname_swap["ship_speed"]] == "kn":
             units_dict[varname_swap["ship_speed"]] = "knot"
-
+    
     for v in dship_sec.keys():
         dship_sec[v].attrs["units"] = units_dict[varname_swap[v]]
 
     for v in varname_swap.keys():
         dship_sec = remove_fill_vals(dship_sec, ship_name, v)
-
+    
     dship_sec = dship_sec.pint.quantify(unit_registry=units)
     for v in varname_swap.keys():
         minutely_data = min_means(dship_sec, v)
