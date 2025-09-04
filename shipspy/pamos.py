@@ -145,24 +145,6 @@ def fix_unit(ds, dict, v):
     return ds
 
 
-def quality_flag(ds, vars, flag_dict, deltat):
-    flag = np.zeros(len(ds.time))
-    for v in vars:
-        range_max = flag_dict[v]["max"]
-        range_min = flag_dict[v]["min"]
-        var = flag_dict[v]["var"]
-        too_large = (np.argwhere(ds[v].values > range_max)).flatten()
-        too_small = (np.argwhere(ds[v].values < range_min)).flatten()
-        too_noisy = (
-            np.argwhere(ds[v].rolling(time=deltat, center=True).var().values > var)
-        ).flatten()
-        nans = (np.argwhere(np.isnan(ds[v].values))).flatten()
-        alert = np.concatenate([too_large, too_small, too_noisy, nans])
-        alert = np.unique(np.sort(alert))
-        flag[alert] = 1
-    return flag
-
-
 def add_attrs(ds, dict, v):
     attrs = dict[v]
     del attrs["varname"]
@@ -288,12 +270,6 @@ def quality_flag(ds, vars, flag_dict, deltat):
 
 def replace_non_floats_with_nan(value):
     return value if isinstance(value, float) else np.nan
-
-
-def add_extra_attrs(ds, dict, v):
-    attrs = dict[v]
-    ds[v].attrs = attrs
-    return ds
 
 
 def run(args):
