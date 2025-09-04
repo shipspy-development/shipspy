@@ -116,7 +116,23 @@ def fix(ds, ship, var):
     """
     Fixes on variables
     """
-    if var in ["t_air","t_air_port","t_air_board","sst_port","sst_intern_port","sst_extern_port","sst_board","sst_intern_board","sst_extern_board","td_port","td_board","sst_2m", "sst_7m", "sst_4m", "sst_3m"]:
+    if var in [
+        "t_air",
+        "t_air_port",
+        "t_air_board",
+        "sst_port",
+        "sst_intern_port",
+        "sst_extern_port",
+        "sst_board",
+        "sst_intern_board",
+        "sst_extern_board",
+        "td_port",
+        "td_board",
+        "sst_2m",
+        "sst_7m",
+        "sst_4m",
+        "sst_3m",
+    ]:
         ds[var] = ds[var].pint.to("kelvin")  # convert deg Celcius to K
     if var == "p_air":
         ds[var] = ds[var].pint.to("pascal")  # convert hPa to Pa
@@ -314,13 +330,13 @@ def run(args):
     if "ship_speed" in varname_swap:
         if units_dict[varname_swap["ship_speed"]] == "kn":
             units_dict[varname_swap["ship_speed"]] = "knot"
-    
+
     for v in dship_sec.keys():
         dship_sec[v].attrs["units"] = units_dict[varname_swap[v]]
 
     for v in varname_swap.keys():
         dship_sec = remove_fill_vals(dship_sec, ship_name, v)
-    
+
     dship_sec = dship_sec.pint.quantify(unit_registry=units)
     for v in varname_swap.keys():
         minutely_data = min_means(dship_sec, v)
