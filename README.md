@@ -30,7 +30,7 @@ with
 * `input file`: downloaded data from BSH or GEOMAR (or directly from the ship) as txt or dat file with unix time stamp (seconds since 1970-01-01)
 * `output file`: file name of netCDF output file
 * `attribute dictionary`: yaml dictionary with variable names and attribute. For example dictionaries for the different research vessels see `rv_information` 
-* `ship`: name of the ship. Options are `Merian`, `Sonne`, and `Meteor`
+* `ship`: name of the ship. Options are `Merian`, `Sonne`, `Polarstern`, `Meteor`, and `Test`.
 
 ### Renaming
 
