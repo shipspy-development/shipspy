@@ -133,7 +133,7 @@ def fix(ds, ship, var):
         "sst_4m",
         "sst_3m",
         "sst_10m",
-        "dp"
+        "dp",
     ]:
         ds[var] = ds[var].pint.to("kelvin")  # convert deg Celcius to K
     if var == "p_air":
