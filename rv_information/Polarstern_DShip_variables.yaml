@@ -1,0 +1,170 @@
+vessel:polarstern:dship1:TSG_KEEL.SBE21.Conductivity:
+  cell_method: 1-minute mean
+  instrument: Thermosalinograph keel (DShip)
+  long_name: sea water electrical conductivity
+  standard_name: sea_water_electrical_conductivity
+  units: S m-1
+  varname: conductivity
+vessel:polarstern:dship1:FERRYBOX.FBOX.flntu_chlorophyll:
+  cell_method: 1-minute mean
+  instrument: Ferrybox (DShip)
+  long_name: mass concentration of chlorophyll a in sea water
+  standard_name: mass_concentration_of_chlorophyll_a_in_sea_water
+  units: kg m-3
+  varname: chlorophyll_a
+vessel:polarstern:dship1:FERRYBOX.FBOX.optode_oxygen:
+  cell_method: 1-minute mean
+  instrument: Ferrybox (DShip)
+  long_name: mole concentration of oxygen in sea water
+  standard_name: mole_concentration_of_dissolved_molecular_oxygen_in_sea_water
+  units: mol m-3
+  varname: oxygen
+vessel:polarstern:dship1:FERRYBOX.FBOX.flntu_turbidity:
+  cell_method: 1-minute mean
+  instrument: Ferrybox (DShip)
+  long_name: sea water turbidity
+  standard_name: sea_water_turbidity
+  units: '1'
+  varname: turbidity
+vessel:polarstern:dship1:TSG_KEEL.SBE21.Salinity:
+  cell_method: 1-minute mean
+  instrument: Thermosalinograph keel (DShip)
+  long_name: sea water salinity
+  standard_name: sea_water_practical_salinity
+  units: '1'
+  varname: salinity
+vessel:polarstern:dship1:TSG_KEEL.SBE21.SoundVeloExt:
+  cell_method: 1-minute mean
+  instrument: Thermosalinograph keel (DShip)
+  long_name: sea water sound speed
+  standard_name: speed_of_sound_in_sea_water
+  units: m s-1
+  varname: sspd_sw
+vessel:polarstern:dship1:TSG_KEEL.SBE21.TempExtern:
+  cell_method: 1-minute mean
+  instrument: Thermosalinograph keel (DShip)
+  long_name: sea surface temperature (sensor depth 10.5m)
+  standard_name: sea_surface_temperature
+  units: K
+  varname: sst_10m
+vessel:polarstern:dship1:SYS.CALC.SPEED_kmh:
+  cell_method: 1-minute mean
+  instrument: System (DShip)
+  long_name: ship speed over ground
+  standard_name: platform_speed_wrt_ground
+  units: m s-1
+  varname: ship_speed
+vessel:polarstern:dship1:SYS.STR.DPT:
+  cell_method: 1-minute mean
+  instrument: System (DShip)
+  long_name: sea floor depth below sea surface
+  standard_name: sea_floor_depth_below_sea_surface
+  units: m
+  varname: sea_floor_depth
+vessel:polarstern:dship1:SYS.STR.HDG:
+  cell_method: 1-minute mean
+  instrument: System (DShip)
+  long_name: ship heading
+  standard_name: platform_orientation
+  units: degree
+  varname: ship_heading
+vessel:polarstern:dship1:SYS.STR.PosLat:
+  axis: Y
+  cell_method: 1-minute mean
+  instrument: System (DShip)
+  long_name: latitude
+  standard_name: latitude
+  units: degree_north
+  varname: lat
+vessel:polarstern:dship1:SYS.STR.PosLon:
+  axis: X
+  cell_method: 1-minute mean
+  instrument: System (DShip)
+  long_name: longitude
+  standard_name: longitude
+  units: degree_east
+  varname: lon
+vessel:polarstern:dship1:MAGNETICS.PSMAG.gyro_pitch:
+  cell_method: 1-minute mean
+  instrument: Magnetometer (DShip)
+  long_name: ship pitch
+  standard_name: platform_pitch
+  units: degree
+  varname: ship_pitch
+vessel:polarstern:dship1:MAGNETICS.PSMAG.gyro_roll:
+  cell_method: 1-minute mean
+  instrument: Magnetometer (DShip)
+  long_name: ship roll
+  standard_name: platform_roll
+  units: degree
+  varname: ship_roll
+vessel:polarstern:dship1:WEATHER.PAWIBWW.true_wind_direction:
+  cell_method: 1-minute circular mean
+  instrument: Weatherstation (DShip)
+  long_name: wind direction (sensor height)
+  standard_name: wind_from_direction
+  units: degree
+  varname: wdir
+vessel:polarstern:dship1:WEATHER.PAWIBWW.true_wind_velocity:
+  cell_method: 1-minute mean
+  instrument: Weatherstation (DShip)
+  long_name: wind speed (sensor height)
+  standard_name: wind_speed
+  units: m s-1
+  varname: wspd
+vessel:polarstern:dship1:WEATHER.PAWIBWW.air_pressure:
+  cell_method: 1-minute mean
+  instrument: Weatherstation (DShip)
+  long_name: air pressure (sea level)
+  standard_name: air_pressure
+  units: Pa
+  varname: p_air
+vessel:polarstern:dship1:WEATHER.PAWIBWW.air_temperature:
+  cell_method: 1-minute mean
+  instrument: Weatherstation (DShip)
+  long_name: air temperature (sensor height)
+  standard_name: air_temperature
+  units: K
+  varname: t_air
+vessel:polarstern:dship1:WEATHER.PAWIBWW.ceiling_m:
+  cell_method: 1-minute mean
+  instrument: Weatherstation (DShip)
+  long_name: cloud base height (sensor height)
+  standard_name: cloud_base_altitude
+  units: m
+  varname: cbh
+vessel:polarstern:dship1:WEATHER.PAWIBWW.dewpoint:
+  cell_method: 1-minute mean
+  instrument: Weatherstation (DShip)
+  long_name: dew point temperature (sensor height)
+  standard_name: dew_point_temperature
+  units: K
+  varname: dp
+vessel:polarstern:dship1:WEATHER.PAWIBWW.global_radiation:
+  cell_method: 1-minute mean
+  instrument: Weatherstation (DShip)
+  long_name: downward global radiation
+  standard_name: surface_net_downward_radiative_flux
+  units: W m-2
+  varname: rad
+vessel:polarstern:dship1:WEATHER.PAWIBWW.rel_humidity:
+  cell_method: 1-minute mean
+  instrument: Weatherstation (DShip)
+  long_name: relative humidity (sensor height)
+  standard_name: relative_humidity
+  units: '1'
+  varname: rh
+vessel:polarstern:dship1:WEATHER.PAWIBWW.visibility:
+  cell_method: 1-minute mean
+  instrument: Weatherstation (DShip)
+  long_name: visibility
+  standard_name: visibility_in_air
+  units: m
+  varname: visibility
+vessel:polarstern:dship1:WEATHER.PAWIBWW.water_temperature:
+  cell_method: 1-minute mean
+  instrument: Weatherstation (DShip)
+  long_name: sea surface temperature (sensor depth 2m)
+  standard_name: sea_surface_temperature
+  units: K
+  varname: sst_2m
