@@ -39,8 +39,8 @@ def configure_dship_parser(parser):
     parser.add_argument(
         "-s",
         "--ship",
-        metavar="Merian, Sonne, Meteor, or Test",
-        help="Ship name where the data comes from. Options are Merian, Sonne, Meteor, Test.",
+        metavar="Merian, Sonne, Meteor, Polarstern, or Test",
+        help="Ship name where the data comes from. Options are Merian, Sonne, Meteor, Polarstern, Test.",
         required=True,
     )
 
@@ -101,7 +101,7 @@ def remove_fill_vals(ds, ship, var):
     Remove fill values. For Sonne, fill value is 9.
     Also remove unphysical values.
     """
-    if ship in ["Sonne", "Meteor", "Test"]:
+    if ship in ["Sonne", "Meteor", "Polarstern", "Test"]:
         ds[var] = ds[var].where(ds[var] != 9.0, other=np.nan)
     if (ship == "Merian") & (var == "sst_7m"):
         ds[var] = ds[var].where(ds[var] != 0, other=np.nan)
@@ -132,6 +132,8 @@ def fix(ds, ship, var):
         "sst_7m",
         "sst_4m",
         "sst_3m",
+        "sst_10m",
+        "dp"
     ]:
         ds[var] = ds[var].pint.to("kelvin")  # convert deg Celcius to K
     if var == "p_air":
@@ -142,6 +144,8 @@ def fix(ds, ship, var):
         ds[var] = ds[var].pint.to("1")  # convert g/kg to 1
     if var == "chlorophyll_a":
         ds[var] = ds[var].pint.to("kg/m^3")  # convert 10^-6kg/m^3 to kg/m^3
+    if var == "oxygen":
+        ds[var] = ds[var].pint.to("mol/m^3")
     if var == "ship_speed":
         ds[var] = ds[var].pint.to("m/s")  # convert to m/s
     ds = ds.pint.dequantify()
@@ -245,6 +249,33 @@ def var_ordering(ship):
             "ship_roll",
             "ship_roll_std",
         ]
+    elif ship == "Polarstern":
+        ordering = [
+            "t_air",
+            "p_air",
+            "wspd",
+            "wdir",
+            "rh",
+            "dp",
+            "rad",
+            "cbh",
+            "visibility",
+            "sea_floor_depth",
+            "sst_2m",
+            "sst_10m",
+            "sspd_sw",
+            "conductivity",
+            "salinity",
+            "chlorophyll_a",
+            "oxygen",
+            "turbidity",
+            "ship_speed",
+            "ship_heading",
+            "ship_pitch",
+            "ship_pitch_std",
+            "ship_roll",
+            "ship_roll_std",
+        ]
     elif ship == "Test":
         ordering = ["t_air", "p_air"]
     return ordering
@@ -312,11 +343,14 @@ def run(args):
         ), dship_data.lon.apply(format_loc)
     dship_data.where(dship_data != "NODATA", np.nan, inplace=True)
     dship_data.where(dship_data != "np.nan", np.nan, inplace=True)
-    secs_since_1970 = dship_data["seconds since 1970"].values
-    timestamps = np.datetime64(
-        "1970-01-01T00:00:00"
-    ) + secs_since_1970 * np.timedelta64(1, "s")
-    timestamps = timestamps.astype("datetime64[ns]")
+    try:
+        secs_since_1970 = dship_data["seconds since 1970"].values
+        timestamps = np.datetime64(
+            "1970-01-01T00:00:00"
+        ) + secs_since_1970 * np.timedelta64(1, "s")
+        timestamps = timestamps.astype("datetime64[ns]")
+    except:
+        timestamps = dship_data["date time"].astype("datetime64[ns]").values
     var_list_full = list(dship_data.keys())
     for var in var_list_full:
         if var not in list(varname_dict.values()):
@@ -330,6 +364,12 @@ def run(args):
     if "ship_speed" in varname_swap:
         if units_dict[varname_swap["ship_speed"]] == "kn":
             units_dict[varname_swap["ship_speed"]] = "knot"
+    if "ph" in varname_swap:
+        if units_dict[varname_swap["ph"]] == "-":
+            units_dict[varname_swap["ph"]] = "1"
+    if "turbidity" in varname_swap:
+        if units_dict[varname_swap["turbidity"]] == "NTU":
+            units_dict[varname_swap["turbidity"]] = "1"
 
     for v in dship_sec.keys():
         dship_sec[v].attrs["units"] = units_dict[varname_swap[v]]
@@ -350,14 +390,17 @@ def run(args):
     for v in list(["ship_heave", "ship_roll", "ship_pitch"]):
         if ship_name == "Test":
             break
-        stdname = std_dict[v]["varname"]
-        prepare_data = remove_fill_vals(dship_sec, ship_name, v)
-        minutely_data = min_std(prepare_data, v)
-        minutely_data = minutely_data.rename({v: stdname})
-        attrs = std_dict[v]
-        del attrs["varname"]
-        minutely_data[stdname].attrs = attrs
-        dship = xr.merge([dship, minutely_data])
+        try:
+            stdname = std_dict[v]["varname"]
+            prepare_data = remove_fill_vals(dship_sec, ship_name, v)
+            minutely_data = min_std(prepare_data, v)
+            minutely_data = minutely_data.rename({v: stdname})
+            attrs = std_dict[v]
+            del attrs["varname"]
+            minutely_data[stdname].attrs = attrs
+            dship = xr.merge([dship, minutely_data])
+        except:
+            print(f"{v} not in data.")
 
     dship = dship.set_coords(["lat", "lon"])
     dship = dship[var_ordering(ship_name)]
