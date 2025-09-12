@@ -41,7 +41,7 @@ def configure_rename_parser(parser):
         "-d",
         "--instrument",
         metavar="INSTRUMENT_NAME",
-        help="Instrument/device name, options are: calitoo, microtops, ctd, radiosondes, uav, uav_ocean, hatpro, ceilometer, dusttrak, test",
+        help="Instrument/device name, options are: calitoo, microtops, ctd, radiosondes, uav, uav_ocean, hatpro, ceilometer, dusttrak, cwv, test",
         required=True,
     )
 
@@ -315,6 +315,8 @@ def fix(ds, instrument):
         ds["rh"] = ds.rh.where(
             ds.rh >= 0.0, other=np.nan
         )  # remove unphysical nergative rh
+    if instrument == "cwv":
+        ds = ds.resample(time="min").mean()
     return ds
 
 
