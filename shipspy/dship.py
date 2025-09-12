@@ -105,7 +105,7 @@ def remove_fill_vals(ds, ship, var):
         ds[var] = ds[var].where(ds[var] != 9.0, other=np.nan)
     if (ship == "Merian") & (var == "sst_7m"):
         ds[var] = ds[var].where(ds[var] != 0, other=np.nan)
-    if var in ["wave_height", "wave_length", "wave_period"]:
+    if var in ["wave_height", "wave_length", "wave_period", "cbh"]:
         ds[var] = ds[var].where(ds[var] > 0, other=np.nan)
     if var == "wave_dir":
         ds[var] = ds[var].where((ds[var] > -0.01) & (ds[var] < 360.1), other=np.nan)
