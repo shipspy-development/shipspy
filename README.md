@@ -80,9 +80,9 @@ with
 * `quality flag dictionary`: optional yaml dictionary to be used to assess the quality flags. For an example see [2].
 * `additional attribute dictionary`: optional yaml dictionary with extra variables like quality and pump flags.
 
-The repository [2] with the settings for PAMOS on the MS Fridtjof Nansen can serve as a template.
+The [repository [2]](https://github.com/LauraKoehler/pamos_processing) with the settings for PAMOS on the MS Fridtjof Nansen can serve as a template.
 
 # References
 [1] Köhler, L. (2023). ARC: Processing of atmospheric and oceanographic measurements (Version v1.0.0) [Computer software]. https://github.com/LauraKoehler/arc_processing
 
-[2] Köhler, L. (2025). PAMOS processing (Version 1.0.0) [Computer software]. https://github.com/LauraKoehler/pamos_processing.git
+[2] Köhler, L. (2025). PAMOS processing (Version 1.0.0) [Computer software]. https://github.com/LauraKoehler/pamos_processing
