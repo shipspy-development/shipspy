@@ -2,7 +2,7 @@
 name = "shipspy"
 description = "processing of ship campaign data"
 authors = [
-    {name = "Laura Köhler", email = "laura.koehler@mpimet.mpg.de"},
+    {name = "Laura Köhler", email = "laura.koehler@awi.de"},
 ]
 readme = "README.md"
 dynamic = ["version"]
